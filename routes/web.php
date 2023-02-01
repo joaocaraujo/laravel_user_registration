@@ -15,4 +15,4 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [UserController::class, 'register']);
-Route::post('/save', [UserController::class, 'save']);
+Route::post('/save', [UserController::class, 'save'])->name('save');

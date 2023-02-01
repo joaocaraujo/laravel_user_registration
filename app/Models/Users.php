@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Hash;
 
 class Users extends Model
 {
@@ -17,6 +20,7 @@ class Users extends Model
             "id",
             "name",
             "email",
+            "password",
             "date_register"
         ])
         ->limit($limit);
@@ -28,6 +32,7 @@ class Users extends Model
         $sql = self::insert([
             "name" => $request->input('name'),
             "email" => $request->input('email'),
+            "password" => Hash::make($request->input('password')),
             "date_register" => DB::raw('NOW()')
         ]);
         dd($sql->toSql(), $request->all());
