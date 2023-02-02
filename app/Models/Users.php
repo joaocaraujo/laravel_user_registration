@@ -35,7 +35,7 @@ class Users extends Model
             "password" => Hash::make($request->input('password')),
             "date_register" => DB::raw('NOW()')
         ]);
-        dd($sql->toSql(), $request->all());
+//        dd($sql->toSql(), $request->all());
 
     }
 }

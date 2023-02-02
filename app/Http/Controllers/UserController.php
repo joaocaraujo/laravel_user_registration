@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Hash;
 use App\Http\Controllers\Controller;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -15,9 +16,18 @@ class UserController extends Controller
     public function save(Request $request) {
         $request->validate([
             "name" => "required",
-            "email" => "required|email"
+            "email" => "required|email",
+            "password" => "required|min:5"
         ]);
 
-        dd($request->all());
+        if (Users::registerUser($request)) {
+            return view('user.error');
+        } else {
+            return view('user.success', [
+                "username" => $request->input('name')
+            ]);
+        }
+
+        
     }
 }
