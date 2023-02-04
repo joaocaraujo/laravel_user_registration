@@ -16,16 +16,18 @@ class Users extends Model
     protected $table = 'users';
 
     public static function listUser(int $limit) {
-        $sql = self::select([
+        $sql = self::where("id", ">", 2)
+        ->select([
             "id",
             "name",
             "email",
             "password",
             "date_register"
         ])
-        ->limit($limit);
+        ->limit($limit)
+        ->get();
 
-        dd($sql->toSql());
+        return $sql;
     }
 
     public static function registerUser(Request $request) {
